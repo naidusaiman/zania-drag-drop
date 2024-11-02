@@ -41,6 +41,7 @@ const DragabbleCard = () => {
     if (storedCards && storedCards !== "[]") {
       setCards(JSON.parse(storedCards));
     } else {
+      // Fetch initial data only if local storage is empty
       fetch("/api/cards")
         .then((response) => {
           if (!response.ok) {
@@ -64,9 +65,8 @@ const DragabbleCard = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cards", JSON.stringify(cards));
-    if (JSON.stringify(cards) !== localStorage.getItem("cards")) {
-      setHasChanges(true); // Set hasChanges if localStorage is different
+    if (cards.length > 0) {
+      localStorage.setItem("cards", JSON.stringify(cards));
     }
   }, [cards]);
 
@@ -101,10 +101,13 @@ const DragabbleCard = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      {isSaving && <div className={styles.spinner}>Saving...</div>}
       {isSaving && (
-        <div>
-          Last saved: {Math.floor((Date.now() - lastSaved) / 1000)} seconds ago
+        <div className={styles.spinnerContainer}>
+          <div className={styles.spinner}>Saving...</div>
+          <div>
+            Last saved: {Math.floor((Date.now() - lastSaved) / 1000)} seconds
+            ago
+          </div>
         </div>
       )}
       <div className={styles["card-container"]}>
