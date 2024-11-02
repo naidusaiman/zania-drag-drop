@@ -1,0 +1,21 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 16px; /* Space between cards */
+}
+
+.card-container .card {
+  width: 100%; /* Ensure cards take full width of grid cell */
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr; /* Single column for very small screens */
+  }
+}

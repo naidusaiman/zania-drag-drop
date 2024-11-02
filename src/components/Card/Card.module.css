@@ -1,0 +1,17 @@
+.card {
+  width: 150px; /* Fixed width for the card */
+  border: 1px solid #ccc;
+  overflow: hidden;
+  cursor: grab;
+  min-height: 200px;
+}
+
+.card:active {
+  opacity: 0.7;
+  border: 1px solid #111;
+}
+.card img {
+  width: 100%; /* Make the image take the full width of the card */
+  height: 150px; /* Fixed height for the image */
+  object-fit: cover; /* This will crop the image to fit the box without stretching */
+}
